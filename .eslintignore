@@ -4,3 +4,4 @@ out/
 public/
 package-lock.json
 next.config.js
+tsconfig.json
