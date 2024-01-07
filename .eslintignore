@@ -1,0 +1,7 @@
+.next/
+node_modules/
+out/
+public/
+package-lock.json
+next.config.js
+tsconfig.json
