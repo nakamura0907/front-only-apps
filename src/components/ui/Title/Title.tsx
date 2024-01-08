@@ -1,6 +1,6 @@
-import { BaseTitle } from '@/components/ui/Title/BaseTitle'
+import { Space } from '@/components/ui/Space'
+import { BaseTitle, TitleProps } from '@/components/ui/Title/BaseTitle'
 import { defaultValue, titleSpaceMap } from '@/components/ui/Title/constants'
-import { Space, TitleProps } from '@mantine/core'
 
 export const Title = (props: TitleProps) => {
   const { children, order, ...rest } = props

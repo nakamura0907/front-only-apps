@@ -1,5 +1,7 @@
 'use client'
 
+import '@mdxeditor/editor/style.css'
+
 import {
   BlockTypeSelect,
   BoldItalicUnderlineToggles,
@@ -22,7 +24,6 @@ import {
   type MDXEditorMethods,
   type MDXEditorProps,
 } from '@mdxeditor/editor'
-import '@mdxeditor/editor/style.css'
 import type { ForwardedRef } from 'react'
 
 const plugins = [

@@ -4,3 +4,10 @@
 .editable code::after {
   content: none !important;
 }
+
+.editable li[role="checkbox"] {
+  text-indent: 1.2rem;
+}
+.editable li[role="checkbox"]:before {
+  transform: translate(6px, 6px);
+}

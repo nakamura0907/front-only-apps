@@ -1,9 +1,9 @@
+import { Layout } from '@/components/template/layout'
 import { AppProvider } from '@/providers'
 import { ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import { Layout } from '@/components/template/layout'
 import '@mantine/core/styles.css'
 import './globals.css'
 
