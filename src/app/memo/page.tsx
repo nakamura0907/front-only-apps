@@ -1,10 +1,11 @@
 import { RichEditor } from '@/app/memo/_components/RichEditor'
+import { Title } from '@/components/ui/Title'
 import { Metadata } from 'next'
 
 export default function Page() {
   return (
     <main>
-      <h1>Webメモ帳</h1>
+      <Title order={1}>Webメモ帳</Title>
       <RichEditor />
     </main>
   )
