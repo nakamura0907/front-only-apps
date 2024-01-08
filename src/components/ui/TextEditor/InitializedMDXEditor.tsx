@@ -1,15 +1,19 @@
 'use client'
 
 import {
+  BoldItalicUnderlineToggles,
   MDXEditor,
+  UndoRedo,
   headingsPlugin,
   listsPlugin,
   markdownShortcutPlugin,
   quotePlugin,
   thematicBreakPlugin,
+  toolbarPlugin,
   type MDXEditorMethods,
   type MDXEditorProps,
 } from '@mdxeditor/editor'
+import '@mdxeditor/editor/style.css'
 import type { ForwardedRef } from 'react'
 
 export default function InitializedMDXEditor({
@@ -24,6 +28,14 @@ export default function InitializedMDXEditor({
         quotePlugin(),
         thematicBreakPlugin(),
         markdownShortcutPlugin(),
+        toolbarPlugin({
+          toolbarContents: () => (
+            <>
+              <UndoRedo />
+              <BoldItalicUnderlineToggles />
+            </>
+          ),
+        }),
       ]}
       {...props}
       ref={editorRef}
