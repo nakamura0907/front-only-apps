@@ -1,16 +1,11 @@
-import { TextEditor } from '@/components/ui/TextEditor'
+import { RichEditor } from '@/app/memo/_components/RichEditor'
 import { Metadata } from 'next'
 
 export default function Page() {
   return (
     <main>
       <h1>Webメモ帳</h1>
-      <TextEditor
-        className="prose max-w-none"
-        contentEditableClassName="prose"
-        markdown=""
-        placeholder="# Webメモ帳"
-      />
+      <RichEditor />
     </main>
   )
 }

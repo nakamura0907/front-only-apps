@@ -3,10 +3,3 @@
 @tailwind utilities;
 
 /* @import "../../node_modules/@mdxeditor/editor/dist/style.css"; */
-
-.prose code::before {
-  content: none !important;
-}
-.prose code::after {
-  content: none !important;
-}

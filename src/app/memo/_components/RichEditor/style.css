@@ -1,0 +1,6 @@
+.editable code::before {
+  content: none !important;
+}
+.editable code::after {
+  content: none !important;
+}
