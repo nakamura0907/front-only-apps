@@ -1,7 +1,9 @@
-import { ColorSchemeScript, MantineProvider } from '@mantine/core'
+import { AppProvider } from '@/providers'
+import { ColorSchemeScript } from '@mantine/core'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { Layout } from '@/components/template/layout'
 import '@mantine/core/styles.css'
 import './globals.css'
 
@@ -26,7 +28,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body className={inter.className}>
-        <MantineProvider>{children}</MantineProvider>
+        <AppProvider>
+          <Layout>{children}</Layout>
+        </AppProvider>
       </body>
     </html>
   )
