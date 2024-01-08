@@ -7,6 +7,7 @@ export default function Page() {
       <h1>Webメモ帳</h1>
       <TextEditor
         className="prose max-w-none"
+        contentEditableClassName="prose"
         markdown=""
         placeholder="# Webメモ帳"
       />

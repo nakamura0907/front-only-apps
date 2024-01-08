@@ -1,19 +1,15 @@
-/**
- * TODO: 次はここから
- *
- * - Toolbar Plugin
- * - Code Blocks Plugin
- * - Tables Plugin
- * - Images Plugin
- * - Error Handling
- */
-
 'use client'
 
 import {
+  BlockTypeSelect,
   BoldItalicUnderlineToggles,
+  CodeToggle,
+  CreateLink,
+  InsertTable,
+  ListsToggle,
   MDXEditor,
   RealmPlugin,
+  Separator,
   UndoRedo,
   headingsPlugin,
   linkPlugin,
@@ -40,7 +36,16 @@ const plugins = [
     toolbarContents: () => (
       <>
         <UndoRedo />
+        <Separator />
         <BoldItalicUnderlineToggles />
+        <CodeToggle />
+        <Separator />
+        <ListsToggle />
+        <Separator />
+        <BlockTypeSelect />
+        <Separator />
+        <CreateLink />
+        <InsertTable />
       </>
     ),
   }),
