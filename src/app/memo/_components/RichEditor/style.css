@@ -1,3 +1,4 @@
+/* CSS to remove backticks in editable code elements */
 .editable code::before {
   content: none !important;
 }
@@ -5,6 +6,7 @@
   content: none !important;
 }
 
+/* Adjusting the position of checkboxes in editable list items */
 .editable li[role="checkbox"] {
   text-indent: 1.2rem;
 }

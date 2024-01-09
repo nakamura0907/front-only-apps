@@ -53,6 +53,7 @@ const plugins = [
   tablePlugin(),
 ] as const satisfies RealmPlugin[]
 
+// See: https://mdxeditor.dev/editor/docs/getting-started#nextjs-app-router
 export default function InitializedMDXEditor({
   editorRef,
   ...props

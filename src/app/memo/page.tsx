@@ -1,19 +1,18 @@
 import { RichEditor } from '@/app/memo/_components/RichEditor'
 import { Container } from '@/components/ui/Container'
 import { Title } from '@/components/ui/Title'
+import { routes } from '@/config'
 import { Metadata } from 'next'
-
-const title = 'Webメモ帳'
 
 export default function Page() {
   return (
     <Container>
-      <Title order={1}>{title}</Title>
+      <Title>{routes.memo.label}</Title>
       <RichEditor />
     </Container>
   )
 }
 
 export const metadata: Metadata = {
-  title,
+  title: routes.memo.label,
 }

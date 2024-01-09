@@ -8,6 +8,7 @@ const Editor = dynamic(() => import('./InitializedMDXEditor'), {
   ssr: false,
 })
 
+// See: https://mdxeditor.dev/editor/docs/getting-started#nextjs-app-router
 export const ForwardRefEditor = forwardRef<MDXEditorMethods, MDXEditorProps>(
   (props, ref) => <Editor {...props} editorRef={ref} />,
 )
