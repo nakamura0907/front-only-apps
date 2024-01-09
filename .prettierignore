@@ -4,3 +4,6 @@ out/
 public/
 package-lock.json
 next.config.js
+
+# For importing React
+.storybook/preview.tsx

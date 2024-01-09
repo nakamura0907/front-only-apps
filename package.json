@@ -12,7 +12,9 @@
     "fix": "run-s fix:prettier fix:eslint",
     "fix:eslint": "npm run lint:eslint -- --fix",
     "fix:prettier": "npm run lint:prettier -- --write",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mantine/core": "^7.4.0",
@@ -23,6 +25,15 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.6.7",
+    "@storybook/addon-interactions": "^7.6.7",
+    "@storybook/addon-links": "^7.6.7",
+    "@storybook/addon-onboarding": "^1.0.10",
+    "@storybook/addon-styling-webpack": "^0.0.6",
+    "@storybook/blocks": "^7.6.7",
+    "@storybook/nextjs": "^7.6.7",
+    "@storybook/react": "^7.6.7",
+    "@storybook/test": "^7.6.7",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
@@ -32,6 +43,7 @@
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-perfectionist": "^2.5.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-tailwindcss": "^3.13.1",
     "husky": "^8.0.3",
     "lint-staged": "^15.2.0",
@@ -39,6 +51,8 @@
     "postcss": "^8.4.33",
     "prettier": "^3.1.1",
     "prettier-plugin-organize-imports": "^3.2.4",
+    "storybook": "^7.6.7",
+    "storybook-dark-mode": "^3.0.3",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
