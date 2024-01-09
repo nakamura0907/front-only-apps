@@ -3,9 +3,12 @@
     "next/core-web-vitals",
     "plugin:tailwindcss/recommended",
     "plugin:perfectionist/recommended-natural",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
-  "plugins": ["perfectionist"],
+  "plugins": [
+    "perfectionist"
+  ],
   "rules": {
     "object-shorthand": "error",
     "tailwindcss/no-custom-classname": "off",
