@@ -10,10 +10,12 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Cache node modules
         id: cache-npm
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
