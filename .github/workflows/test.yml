@@ -2,12 +2,21 @@ name: Test Next.js
 
 on:
   push:
-    branches-ignore:
-      - 'main'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
 
 jobs:
   test:
     name: Run tests
+    if: github.event.pull_request.draft == false
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
