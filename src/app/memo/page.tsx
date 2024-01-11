@@ -1,6 +1,5 @@
-import { RichEditor } from '@/app/memo/_components/RichEditor'
-import { Container } from '@/components/ui/Container'
-import { Title } from '@/components/ui/Title'
+import { RichEditor } from '@/app/memo/_components'
+import { Container, Title } from '@/components/ui'
 import { routes } from '@/config'
 import { Metadata } from 'next'
 

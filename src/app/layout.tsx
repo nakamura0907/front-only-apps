@@ -1,7 +1,7 @@
 import '@mantine/core/styles.css'
 import './globals.css'
 
-import { Layout } from '@/components/template/layout'
+import { Layout } from '@/components/template'
 import { meta } from '@/config'
 import { AppProvider } from '@/providers'
 import { ColorSchemeScript } from '@mantine/core'

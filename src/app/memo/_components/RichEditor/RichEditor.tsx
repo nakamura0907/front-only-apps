@@ -1,6 +1,6 @@
 import './style.css'
 
-import { TextEditor } from '@/components/ui/TextEditor'
+import { TextEditor } from '@/components/ui'
 
 export const RichEditor = () => {
   return (
