@@ -22,18 +22,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache node modules and build
+      - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          path: |
-            ~/.npm
-            ${{ github.workspace }}/.next/cache
-          key: ${{ runner.os }}-all-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          path: '**/node_modules'
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-all-${{ hashFiles('**/package-lock.json') }}-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      # Cache Next.js build
 
       - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
         name: List the state of node modules
@@ -42,6 +44,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
 
       - name: Lint
         run: npm run lint
