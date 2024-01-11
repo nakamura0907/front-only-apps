@@ -7,7 +7,7 @@ import { Metadata } from 'next'
 export default function Page() {
   return (
     <Container>
-      <Title>{routes.memo.label}</Title>
+      <Title order={2}>{routes.memo.label}</Title>
       <RichEditor />
     </Container>
   )
