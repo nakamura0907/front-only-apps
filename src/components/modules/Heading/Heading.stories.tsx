@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
-import { Title } from './Title'
+import { Heading } from './Heading'
 
-const meta: Meta<typeof Title> = {
+const meta: Meta<typeof Heading> = {
   argTypes: {
     order: {
       control: {
@@ -10,20 +10,20 @@ const meta: Meta<typeof Title> = {
       options: [1, 2, 3, 4, 5, 6],
     },
   },
-  component: Title,
+  component: Heading,
 }
 export default meta
 
-type Story = StoryObj<typeof Title>
+type Story = StoryObj<typeof Heading>
 
 export const Default: Story = {
   args: {
-    children: 'Title',
+    children: 'Heading',
   },
   render: (args) => (
     <>
       <p>Top</p>
-      <Title {...args} />
+      <Heading {...args} />
       <p>Bottom</p>
     </>
   ),
