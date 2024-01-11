@@ -1,4 +1,6 @@
-import { Drawer as DrawerUI } from '@/components/ui'
+import { Drawer as DrawerUI, NavLink } from '@/components/ui'
+import { routes } from '@/config'
+import Link from 'next/link'
 
 type Props = {
   onClose: () => void
@@ -17,7 +19,11 @@ export const Drawer: React.FC<Props> = ({ onClose, opened }) => {
       overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
       withCloseButton={false}
     >
-      aho
+      <NavLink
+        component={Link}
+        href={routes.memo.path}
+        label={routes.memo.label}
+      />
     </DrawerUI>
   )
 }
