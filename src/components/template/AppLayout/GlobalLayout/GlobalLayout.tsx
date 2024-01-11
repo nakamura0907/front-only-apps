@@ -1,19 +1,22 @@
+'use client'
+
 import { Logo } from '@/components/modules'
+import {
+  useIsDrawerOpen,
+  useOpenDrawer,
+} from '@/components/template/AppLayout/DrawerProvider'
 import { AppShell, Burger, Group } from '@/components/ui'
 
 type Props = {
   children: React.ReactNode
-  onBurgerClick: () => void
-  opened: boolean
 }
 
-export const GlobalLayout: React.FC<Props> = ({
-  children,
-  onBurgerClick,
-  opened,
-}) => {
+export const GlobalLayout: React.FC<Props> = ({ children }) => {
+  const opened = useIsDrawerOpen()
+  const open = useOpenDrawer()
+
   const handleBurgerClick = () => {
-    onBurgerClick()
+    open()
   }
 
   return (

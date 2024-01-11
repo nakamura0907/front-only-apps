@@ -1,15 +1,19 @@
+'use client'
+
+import {
+  useCloseDrawer,
+  useIsDrawerOpen,
+} from '@/components/template/AppLayout/DrawerProvider'
 import { Drawer as DrawerUI, NavLink } from '@/components/ui'
 import { routes } from '@/config'
 import Link from 'next/link'
 
-type Props = {
-  onClose: () => void
-  opened: boolean
-}
+export const Drawer = () => {
+  const opened = useIsDrawerOpen()
+  const close = useCloseDrawer()
 
-export const Drawer: React.FC<Props> = ({ onClose, opened }) => {
   const handleClose = () => {
-    onClose()
+    close()
   }
 
   return (
@@ -17,7 +21,6 @@ export const Drawer: React.FC<Props> = ({ onClose, opened }) => {
       onClose={handleClose}
       opened={opened}
       overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
-      withCloseButton={false}
     >
       <NavLink
         component={Link}
