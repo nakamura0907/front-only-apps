@@ -1,7 +1,7 @@
 import '@mantine/core/styles.css'
 import './globals.css'
 
-import { Layout } from '@/components/template'
+import { AppLayout } from '@/components/template'
 import { meta } from '@/config'
 import { AppProvider } from '@/providers'
 import { ColorSchemeScript } from '@mantine/core'
@@ -30,7 +30,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AppProvider>
-          <Layout>{children}</Layout>
+          <AppLayout>{children}</AppLayout>
         </AppProvider>
       </body>
     </html>
