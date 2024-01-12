@@ -21,6 +21,7 @@
     "@mantine/hooks": "^7.4.0",
     "@mdxeditor/editor": "^2.2.1",
     "next": "14.0.4",
+    "nextjs-toploader": "^1.6.4",
     "react": "^18",
     "react-dom": "^18"
   },

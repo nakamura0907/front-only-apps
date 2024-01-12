@@ -1,1 +1,2 @@
-export { Title, type TitleProps } from './Title'
+export { Title } from '@mantine/core'
+export type { TitleProps } from '@mantine/core'
