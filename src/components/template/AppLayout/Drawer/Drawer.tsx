@@ -26,6 +26,7 @@ export const Drawer = () => {
         component={Link}
         href={routes.memo.path}
         label={routes.memo.label}
+        onClick={handleClose}
       />
     </DrawerUI>
   )

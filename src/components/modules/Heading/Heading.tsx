@@ -15,6 +15,10 @@ const headingSpaceMap = {
 
 const defaultOrder: Order = 1
 
+/**
+ * Titleコンポーネントの上下にSpaceコンポーネントを追加した、
+ * 見出し用のコンポーネント
+ */
 export const Heading = (props: TitleProps) => {
   const { children, order, ...rest } = props
 
