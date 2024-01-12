@@ -3,8 +3,7 @@ import './globals.css'
 
 import { AppLayout } from '@/components/template'
 import { meta } from '@/config'
-import { AppProvider } from '@/providers'
-import { ColorSchemeScript } from '@mantine/core'
+import { AppProvider, ColorSchemeScript } from '@/providers'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 

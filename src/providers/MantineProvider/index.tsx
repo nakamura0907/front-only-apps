@@ -1,1 +1,2 @@
-export { MantineProvider } from '@mantine/core'
+// ColorSchemeScriptをここでexportしているのは、GitHub上でもMantineProviderとまとめられていたため
+export { ColorSchemeScript, MantineProvider } from '@mantine/core'
