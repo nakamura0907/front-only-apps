@@ -1,19 +1,19 @@
-import { Layout } from '@/components/template/layout'
-import { AppProvider } from '@/providers'
-import { ColorSchemeScript } from '@mantine/core'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
 import '@mantine/core/styles.css'
 import './globals.css'
+
+import { AppLayout } from '@/components/template'
+import { meta } from '@/config'
+import { AppProvider, ColorSchemeScript } from '@/providers'
+import type { Metadata } from 'next'
+import { Inter } from 'next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  description: 'フロントエンドだけで動作するNext.jsアプリケーション集',
+  description: meta.description,
   title: {
-    default: 'Front Only Apps',
-    template: '%s | Front Only Apps',
+    default: meta.title.default,
+    template: `%s ${meta.title.separator} ${meta.title.default}`,
   },
 }
 
@@ -29,7 +29,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <AppProvider>
-          <Layout>{children}</Layout>
+          <AppLayout>{children}</AppLayout>
         </AppProvider>
       </body>
     </html>
