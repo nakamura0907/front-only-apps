@@ -7,6 +7,11 @@ export const meta = {
 } as const
 
 export const routes = {
+  mediaConverter: {
+    description: '音声や動画の変換アプリケーション',
+    label: 'メディア変換',
+    path: '/media-converter',
+  },
   memo: {
     label: 'Webメモ帳',
     path: '/memo',
