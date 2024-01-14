@@ -8,7 +8,6 @@ export const RichEditor = () => {
       {/* Comming Soon... */}
       {/* 自動保存チェックボックス */}
       <TextEditor
-        className="prose max-w-none"
         contentEditableClassName="editable"
         markdown=""
         placeholder="# Webメモ帳"

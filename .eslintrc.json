@@ -1,7 +1,6 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:tailwindcss/recommended",
     "plugin:perfectionist/recommended-natural",
     "prettier",
     "plugin:storybook/recommended"
@@ -9,7 +8,6 @@
   "plugins": ["perfectionist"],
   "rules": {
     "object-shorthand": "error",
-    "tailwindcss/no-custom-classname": "off",
     "perfectionist/sort-objects": [
       "error",
       {
