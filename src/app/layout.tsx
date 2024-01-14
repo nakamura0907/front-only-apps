@@ -1,5 +1,7 @@
-import '@mantine/core/styles.css'
 import './globals.css'
+
+import '@mantine/core/styles.css'
+import '@mantine/notifications/styles.css'
 
 import { AppLayout } from '@/components/template'
 import { meta } from '@/config'

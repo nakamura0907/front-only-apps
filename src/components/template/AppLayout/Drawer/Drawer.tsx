@@ -24,6 +24,13 @@ export const Drawer = () => {
     >
       <NavLink
         component={Link}
+        description={routes.mediaConverter.description}
+        href={routes.mediaConverter.path}
+        label={routes.mediaConverter.label}
+        onClick={handleClose}
+      />
+      <NavLink
+        component={Link}
         href={routes.memo.path}
         label={routes.memo.label}
         onClick={handleClose}
