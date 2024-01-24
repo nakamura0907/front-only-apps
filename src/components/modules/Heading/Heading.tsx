@@ -3,7 +3,7 @@ import { Space, Title, type TitleProps } from '@/components/ui'
 type Order = NonNullable<TitleProps['order']>
 type HeadingSpaceMap = { [key in Order]: { bottom: string; top: string } }
 
-// Titleのorderに応じた、上下のスペース
+// Titleコンポーネントのorder propsに応じた、上下のスペース
 const headingSpaceMap = {
   1: { bottom: '24px', top: '64px' },
   2: { bottom: '24px', top: '64px' },
@@ -20,9 +20,9 @@ const defaultOrder: Order = 1
  * 見出し用のコンポーネント
  */
 export const Heading = (props: TitleProps) => {
-  const { children, order, ...rest } = props
+  const { children, order = defaultOrder, ...rest } = props
 
-  const { bottom, top } = headingSpaceMap[order ?? defaultOrder]
+  const { bottom, top } = headingSpaceMap[order]
   return (
     <>
       <Space h={top} />
