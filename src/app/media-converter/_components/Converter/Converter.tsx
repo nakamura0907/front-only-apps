@@ -3,11 +3,12 @@
 import { Button, Group, Stack, notifications } from '@/components/ui'
 import { FileInput, Form, Select, SelectProps, useForm } from '@/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { accept, audioFormats, videoFormats } from './constants'
-import { AcceptFileType, convert } from './features'
+import { acceptedMediaTypes, audioFormats, videoFormats } from './constants'
+import { AllowedFileType, convertFileFormat } from './features'
 
 type FormSchemaType = {
   file: File | null
+  /** 変換後の拡張子 */
   targetFileExtension: string
 }
 
@@ -27,7 +28,7 @@ export const Converter = () => {
   })
 
   const [uploadedFileType, setUploadedFileType] =
-    useState<AcceptFileType | null>(null)
+    useState<AllowedFileType | null>(null)
 
   const watchFile = watch('file', initialValues.file)
   const watchTargetFileExtension = watch(
@@ -87,7 +88,10 @@ export const Converter = () => {
       const { file } = data
       if (!file || !uploadedFileType) return
 
-      const convertedFile = await convert(file, data.targetFileExtension)
+      const convertedFile = await convertFileFormat(
+        file,
+        data.targetFileExtension,
+      )
 
       downloadFile(convertedFile)
     } catch (error) {
@@ -103,7 +107,7 @@ export const Converter = () => {
     <Form control={control} onSubmit={(e) => handleSubmit(e.data)}>
       <Stack gap="xl">
         <FileInput
-          accept={accept}
+          accept={acceptedMediaTypes}
           clearable
           control={control}
           label="ファイルを選択"
@@ -138,10 +142,11 @@ const downloadFile = (file: File) => {
   link.href = URL.createObjectURL(file)
   link.download = file.name
   link.click()
+  link.remove()
 }
 
 const getExtensions = (
-  fileType: AcceptFileType | null,
+  fileType: AllowedFileType | null,
 ): SelectProps<FormSchemaType>['data'] => {
   if (!fileType) return []
 
