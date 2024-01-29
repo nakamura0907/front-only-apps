@@ -4,11 +4,15 @@ import { ButtonGroup } from '@/app/media-converter/_components/Converter/ButtonG
 import { ExtensionSelect } from '@/app/media-converter/_components/Converter/ExtensionSelect/ExtensionSelect'
 import { MediaInput } from '@/app/media-converter/_components/Converter/MediaInput/MediaInput'
 import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+import {
+  AllowedFileType,
+  audioFormats,
+  convertFileFormat,
+  videoFormats,
+} from '@/app/media-converter/_features'
 import { Stack, notifications } from '@/components/ui'
 import { Form, FormProvider, useForm } from '@/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { audioFormats, videoFormats } from './constants'
-import { AllowedFileType, convertFileFormat } from './features'
 
 const initialValues: Partial<FormSchemaType> = {
   file: null,

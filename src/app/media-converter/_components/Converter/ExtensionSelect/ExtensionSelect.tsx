@@ -1,9 +1,9 @@
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
 import {
+  AllowedFileType,
   audioFormats,
   videoFormats,
-} from '@/app/media-converter/_components/Converter/constants'
-import { AllowedFileType } from '@/app/media-converter/_components/Converter/features'
-import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+} from '@/app/media-converter/_features'
 import { Select, SelectProps, useFormContext } from '@/hooks'
 
 type Props = {

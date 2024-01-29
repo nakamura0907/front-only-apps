@@ -1,7 +1,5 @@
 import { FFmpeg, loadFFmpeg, transcodeFile } from '@/vendor'
 
-export type AllowedFileType = 'audio' | 'video'
-
 export const convertFileFormat = async (file: File, extension: string) => {
   const ffmpeg = new FFmpeg()
   await loadFFmpeg(ffmpeg)

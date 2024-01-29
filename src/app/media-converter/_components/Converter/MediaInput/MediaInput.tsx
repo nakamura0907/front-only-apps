@@ -1,5 +1,5 @@
-import { acceptedMediaTypes } from '@/app/media-converter/_components/Converter/constants'
 import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+import { acceptedMediaTypes } from '@/app/media-converter/_features'
 import { FileInput, useFormContext } from '@/hooks'
 
 export const MediaInput = () => {

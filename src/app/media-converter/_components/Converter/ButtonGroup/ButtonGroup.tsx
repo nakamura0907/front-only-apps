@@ -5,10 +5,7 @@ import { useFormContext } from '@/hooks'
 export const ButtonGroup = () => {
   const { watch } = useFormContext<FormSchemaType>()
 
-  const watchTargetFileExtension = watch(
-    'targetFileExtension',
-    undefined, // TODO: 改善
-  )
+  const watchTargetFileExtension = watch('targetFileExtension', undefined)
 
   return (
     <Group justify="flex-end">
