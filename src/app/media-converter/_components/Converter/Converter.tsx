@@ -1,15 +1,18 @@
 'use client'
 
-import { Button, Group, Stack, notifications } from '@/components/ui'
-import { FileInput, Form, Select, SelectProps, useForm } from '@/hooks'
+import { ButtonGroup } from '@/app/media-converter/_components/Converter/ButtonGroup/ButtonGroup'
+import { ExtensionSelect } from '@/app/media-converter/_components/Converter/ExtensionSelect/ExtensionSelect'
+import { MediaInput } from '@/app/media-converter/_components/Converter/MediaInput/MediaInput'
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+import {
+  AllowedFileType,
+  audioFormats,
+  convertFileFormat,
+  videoFormats,
+} from '@/app/media-converter/_features'
+import { Stack, notifications } from '@/components/ui'
+import { Form, FormProvider, useForm } from '@/hooks'
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { accept, audioFormats, videoFormats } from './constants'
-import { AcceptFileType, convert } from './features'
-
-type FormSchemaType = {
-  file: File | null
-  targetFileExtension: string
-}
 
 const initialValues: Partial<FormSchemaType> = {
   file: null,
@@ -19,7 +22,7 @@ const initialValues: Partial<FormSchemaType> = {
 export const Converter = () => {
   // const ffmpegRef = useRef(new FFmpeg()) // doesn't work
 
-  const { control, reset, watch } = useForm<FormSchemaType>({
+  const methods = useForm<FormSchemaType>({
     defaultValues: {
       file: initialValues.file,
       targetFileExtension: initialValues.targetFileExtension,
@@ -27,18 +30,14 @@ export const Converter = () => {
   })
 
   const [uploadedFileType, setUploadedFileType] =
-    useState<AcceptFileType | null>(null)
+    useState<AllowedFileType | null>(null)
 
-  const watchFile = watch('file', initialValues.file)
-  const watchTargetFileExtension = watch(
-    'targetFileExtension',
-    initialValues.targetFileExtension,
-  )
+  const watchFile = methods.watch('file', initialValues.file)
 
   const resetFileType = useCallback(() => {
-    reset({ targetFileExtension: initialValues.targetFileExtension })
+    methods.reset({ targetFileExtension: initialValues.targetFileExtension })
     setUploadedFileType(null)
-  }, [reset])
+  }, [methods])
 
   // ファイルの種類に応じた処理を行う
   const fileTypeActions = useMemo(() => {
@@ -87,7 +86,10 @@ export const Converter = () => {
       const { file } = data
       if (!file || !uploadedFileType) return
 
-      const convertedFile = await convert(file, data.targetFileExtension)
+      const convertedFile = await convertFileFormat(
+        file,
+        data.targetFileExtension,
+      )
 
       downloadFile(convertedFile)
     } catch (error) {
@@ -100,36 +102,18 @@ export const Converter = () => {
   }
 
   return (
-    <Form control={control} onSubmit={(e) => handleSubmit(e.data)}>
-      <Stack gap="xl">
-        <FileInput
-          accept={accept}
-          clearable
-          control={control}
-          label="ファイルを選択"
-          name="file"
-          placeholder="音声または動画ファイルを選択"
-        />
-
-        <Select
-          control={control}
-          data={getExtensions(uploadedFileType)}
-          disabled={!watchFile}
-          label="変換後の拡張子"
-          name="targetFileExtension"
-        />
-
-        <Group justify="flex-end">
-          <Button
-            disabled={!watchTargetFileExtension}
-            type="submit"
-            variant="filled"
-          >
-            ダウンロードする
-          </Button>
-        </Group>
-      </Stack>
-    </Form>
+    <FormProvider {...methods}>
+      <Form control={methods.control} onSubmit={(e) => handleSubmit(e.data)}>
+        <Stack gap="xl">
+          <MediaInput />
+          <ExtensionSelect
+            uploadedFileType={uploadedFileType}
+            watchFile={watchFile}
+          />
+          <ButtonGroup />
+        </Stack>
+      </Form>
+    </FormProvider>
   )
 }
 
@@ -138,15 +122,5 @@ const downloadFile = (file: File) => {
   link.href = URL.createObjectURL(file)
   link.download = file.name
   link.click()
-}
-
-const getExtensions = (
-  fileType: AcceptFileType | null,
-): SelectProps<FormSchemaType>['data'] => {
-  if (!fileType) return []
-
-  if (fileType === 'audio') {
-    return audioFormats.map((format) => format.extension)
-  }
-  return videoFormats.map((format) => format.extension)
+  link.remove()
 }

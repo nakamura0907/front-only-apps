@@ -1,4 +1,4 @@
-type Format = {
+type MediaFormat = {
   extension: string
   mimeType: string
 }
@@ -9,7 +9,7 @@ export const audioFormats = [
   { extension: 'aac', mimeType: 'audio/aac' },
   { extension: 'ogg', mimeType: 'audio/ogg' },
   { extension: 'flac', mimeType: 'audio/flac' },
-] as const satisfies Format[]
+] as const satisfies MediaFormat[]
 
 export const videoFormats = [
   { extension: 'mp4', mimeType: 'video/mp4' },
@@ -17,9 +17,9 @@ export const videoFormats = [
   { extension: 'mkv', mimeType: 'video/x-matroska' },
   { extension: 'webm', mimeType: 'video/webm' },
   { extension: 'mov', mimeType: 'video/quicktime' },
-] as const satisfies Format[]
+] as const satisfies MediaFormat[]
 
-export const accept = [
+export const acceptedMediaTypes = [
   ...audioFormats.map((format) => format.mimeType),
   ...videoFormats.map((format) => format.mimeType),
 ].join(',')

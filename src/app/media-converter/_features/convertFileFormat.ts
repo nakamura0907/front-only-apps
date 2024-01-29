@@ -1,13 +1,11 @@
 import { FFmpeg, loadFFmpeg, transcodeFile } from '@/vendor'
 
-export type AcceptFileType = 'audio' | 'video'
-
-export const convert = async (file: File, extension: string) => {
+export const convertFileFormat = async (file: File, extension: string) => {
   const ffmpeg = new FFmpeg()
   await loadFFmpeg(ffmpeg)
 
   const inputFileName = file.name
-  const outputFileName = replaceExtension(inputFileName, extension)
+  const outputFileName = replaceFileExtension(inputFileName, extension)
 
   const data = await transcodeFile(ffmpeg, file, inputFileName, outputFileName)
 
@@ -18,9 +16,9 @@ export const convert = async (file: File, extension: string) => {
  * 拡張子を置き換える
  *
  * @param fileName
- * @param extension {string} without dot
- * @returns
+ * @param extension {string} without dot (e.g. wav)
+ * @returns {string} e.g. (sample.mp3, wav) => sample.wav
  */
-const replaceExtension = (fileName: string, extension: string) => {
+const replaceFileExtension = (fileName: string, extension: string) => {
   return fileName.replace(/\.[^/.]+$/, `.${extension}`)
 }
