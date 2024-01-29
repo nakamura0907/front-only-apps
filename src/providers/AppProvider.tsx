@@ -1,5 +1,10 @@
+import { LoadingProvider } from '@/providers/LoadingProvider'
 import { MantineProvider } from './MantineProvider'
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  return <MantineProvider>{children}</MantineProvider>
+  return (
+    <MantineProvider>
+      <LoadingProvider>{children}</LoadingProvider>
+    </MantineProvider>
+  )
 }
