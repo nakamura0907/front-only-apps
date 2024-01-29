@@ -13,7 +13,7 @@ import {
 import { Stack, notifications } from '@/components/ui'
 import { Form, FormProvider, useForm } from '@/hooks'
 import { useLoadingActions } from '@/providers'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 const initialValues: Partial<FormSchemaType> = {
   file: null,
@@ -34,6 +34,7 @@ export const Converter = () => {
 
   const [uploadedFileType, setUploadedFileType] =
     useState<AllowedFileType | null>(null)
+  const isProcessing = useRef(false)
 
   const watchFile = methods.watch('file', initialValues.file)
 
@@ -85,10 +86,13 @@ export const Converter = () => {
   }, [watchFile, resetFileType, fileTypeActions])
 
   const handleSubmit = async (data: FormSchemaType) => {
-    const { file } = data
-    if (!file || !uploadedFileType) return
-
     try {
+      if (isProcessing.current) return
+      isProcessing.current = true
+
+      const { file } = data
+      if (!file || !uploadedFileType) return
+
       open()
 
       const convertedFile = await convertFileFormat(
@@ -104,6 +108,7 @@ export const Converter = () => {
       })
     } finally {
       close()
+      isProcessing.current = false
     }
   }
 
