@@ -12,7 +12,8 @@ import {
 } from '@/app/media-converter/_features'
 import { Stack, notifications } from '@/components/ui'
 import { Form, FormProvider, useForm } from '@/hooks'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useLoadingActions } from '@/providers'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 const initialValues: Partial<FormSchemaType> = {
   file: null,
@@ -21,6 +22,8 @@ const initialValues: Partial<FormSchemaType> = {
 
 export const Converter = () => {
   // const ffmpegRef = useRef(new FFmpeg()) // doesn't work
+
+  const { close, open } = useLoadingActions()
 
   const methods = useForm<FormSchemaType>({
     defaultValues: {
@@ -31,6 +34,7 @@ export const Converter = () => {
 
   const [uploadedFileType, setUploadedFileType] =
     useState<AllowedFileType | null>(null)
+  const isProcessing = useRef(false)
 
   const watchFile = methods.watch('file', initialValues.file)
 
@@ -83,14 +87,18 @@ export const Converter = () => {
 
   const handleSubmit = async (data: FormSchemaType) => {
     try {
+      if (isProcessing.current) return
+      isProcessing.current = true
+
       const { file } = data
       if (!file || !uploadedFileType) return
+
+      open()
 
       const convertedFile = await convertFileFormat(
         file,
         data.targetFileExtension,
       )
-
       downloadFile(convertedFile)
     } catch (error) {
       console.error(error)
@@ -98,6 +106,9 @@ export const Converter = () => {
         color: 'red',
         message: 'ファイルの変換に失敗しました',
       })
+    } finally {
+      close()
+      isProcessing.current = false
     }
   }
 
