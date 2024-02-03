@@ -1,7 +1,7 @@
 'use client'
 
+import { LoadingOverlay } from '@/components/ui/Loader'
 import { useDisclosure } from '@/hooks'
-import { LoadingOverlay } from '@mantine/core' // TODO: componentsディレクトリに移動
 import { createContext, useContext } from 'react'
 
 type LoadingActions = {
