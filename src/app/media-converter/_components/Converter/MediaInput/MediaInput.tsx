@@ -1,4 +1,4 @@
-import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/Converter.types'
 import { acceptedMediaTypes } from '@/app/media-converter/_features'
 import { FileInput, useFormContext } from '@/hooks'
 
