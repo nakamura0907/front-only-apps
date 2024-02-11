@@ -1,40 +1,76 @@
-import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
-import {
-  AllowedFileType,
-  audioFormats,
-  videoFormats,
-} from '@/app/media-converter/_features'
-import { Select, SelectProps, useFormContext } from '@/hooks'
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/Converter.types'
+import { ExtensionSelectPresenter } from '@/app/media-converter/_components/Converter/ExtensionSelect/ExtensionSelect.presenter'
+import { SelectOptions } from '@/app/media-converter/_components/Converter/ExtensionSelect/ExtensionSelect.types'
+import { audioFormats, videoFormats } from '@/app/media-converter/_features'
+import { notifications } from '@/components/ui'
+import { useFormContext } from '@/hooks'
+import { useEffect, useMemo, useState } from 'react'
 
-type Props = {
-  uploadedFileType: AllowedFileType | null
-  watchFile: File | null
+type State = {
+  options: SelectOptions
 }
 
-export const ExtensionSelect: React.FC<Props> = ({
-  uploadedFileType,
-  watchFile,
-}) => {
-  const { control } = useFormContext<FormSchemaType>()
+const initialState: State = {
+  options: [],
+}
+
+export const ExtensionSelect: React.FC = () => {
+  const { control, reset, watch } = useFormContext<FormSchemaType>()
+  const watchFile = watch('file', null)
+
+  const [options, setOptions] = useState(initialState.options)
+
+  const fileTypeActions = useMemo(() => {
+    return [
+      {
+        action: () =>
+          setOptions(audioFormats.map((format) => format.extension)),
+        condition: (type: string) =>
+          audioFormats.some((format) => format.mimeType === type),
+      },
+      {
+        action: () =>
+          setOptions(videoFormats.map((format) => format.extension)),
+        condition: (type: string) =>
+          videoFormats.some((format) => format.mimeType === type),
+      },
+      {
+        action: () => {
+          setOptions(initialState.options)
+          reset({ targetFileExtension: undefined })
+          notifications.show({
+            color: 'red',
+            message: '対応していないファイルです',
+          })
+        },
+        condition: (_: string) => true,
+      },
+    ]
+  }, [reset])
+
+  useEffect(() => {
+    if (!watchFile) {
+      // clearable
+      setOptions(initialState.options)
+      reset({ targetFileExtension: undefined })
+    } else {
+      const { type } = watchFile
+
+      for (const { action, condition } of fileTypeActions) {
+        if (condition(type)) {
+          action()
+          break
+        }
+      }
+    }
+  }, [watchFile, reset, fileTypeActions])
 
   return (
-    <Select
+    <ExtensionSelectPresenter
       control={control}
-      data={getExtensions(uploadedFileType)}
-      disabled={!watchFile}
-      label="変換後の拡張子"
+      data={options}
+      disabled={!options || options.length == 0}
       name="targetFileExtension"
     />
   )
-}
-
-const getExtensions = (
-  fileType: AllowedFileType | null,
-): SelectProps<FormSchemaType>['data'] => {
-  if (!fileType) return []
-
-  if (fileType === 'audio') {
-    return audioFormats.map((format) => format.extension)
-  }
-  return videoFormats.map((format) => format.extension)
 }

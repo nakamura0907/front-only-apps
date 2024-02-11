@@ -1,21 +1,24 @@
-import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/Converter.types'
 import { Button, Group } from '@/components/ui'
 import { useFormContext } from '@/hooks'
 
-export const ButtonGroup = () => {
-  const { watch } = useFormContext<FormSchemaType>()
+type PresenterProps = {
+  disabled: boolean
+}
 
-  const watchTargetFileExtension = watch('targetFileExtension', undefined)
-
+const ButtonGroupPresenter: React.FC<PresenterProps> = ({ disabled }) => {
   return (
     <Group justify="flex-end">
-      <Button
-        disabled={!watchTargetFileExtension}
-        type="submit"
-        variant="filled"
-      >
+      <Button disabled={disabled} type="submit" variant="filled">
         ダウンロードする
       </Button>
     </Group>
   )
+}
+
+export const ButtonGroup = () => {
+  const { watch } = useFormContext<FormSchemaType>()
+  const watchTargetFileExtension = watch('targetFileExtension', undefined)
+
+  return <ButtonGroupPresenter disabled={!watchTargetFileExtension} />
 }

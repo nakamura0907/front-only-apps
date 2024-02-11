@@ -1,23 +1,28 @@
 'use client'
 
 import { ButtonGroup } from '@/app/media-converter/_components/Converter/ButtonGroup/ButtonGroup'
+import { FormSchemaType } from '@/app/media-converter/_components/Converter/Converter.types'
 import { ExtensionSelect } from '@/app/media-converter/_components/Converter/ExtensionSelect/ExtensionSelect'
 import { MediaInput } from '@/app/media-converter/_components/Converter/MediaInput/MediaInput'
-import { FormSchemaType } from '@/app/media-converter/_components/Converter/types'
-import {
-  AllowedFileType,
-  audioFormats,
-  convertFileFormat,
-  videoFormats,
-} from '@/app/media-converter/_features'
+import { convertFileFormat } from '@/app/media-converter/_features'
 import { Stack, notifications } from '@/components/ui'
 import { Form, FormProvider, useForm } from '@/hooks'
 import { useLoadingActions } from '@/providers'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useRef } from 'react'
 
 const initialValues: Partial<FormSchemaType> = {
   file: null,
   targetFileExtension: undefined,
+}
+
+const downloadFile = (file: File) => {
+  const link = document.createElement('a')
+
+  link.href = URL.createObjectURL(file)
+  link.download = file.name
+
+  link.click()
+  link.remove()
 }
 
 export const Converter = () => {
@@ -32,58 +37,7 @@ export const Converter = () => {
     },
   })
 
-  const [uploadedFileType, setUploadedFileType] =
-    useState<AllowedFileType | null>(null)
   const isProcessing = useRef(false)
-
-  const watchFile = methods.watch('file', initialValues.file)
-
-  const resetFileType = useCallback(() => {
-    methods.reset({ targetFileExtension: initialValues.targetFileExtension })
-    setUploadedFileType(null)
-  }, [methods])
-
-  // ファイルの種類に応じた処理を行う
-  const fileTypeActions = useMemo(() => {
-    return [
-      {
-        action: () => setUploadedFileType('audio'),
-        condition: (type: string) =>
-          audioFormats.some((format) => format.mimeType === type),
-      },
-      {
-        action: () => setUploadedFileType('video'),
-        condition: (type: string) =>
-          videoFormats.some((format) => format.mimeType === type),
-      },
-      {
-        action: () => {
-          resetFileType()
-          notifications.show({
-            color: 'red',
-            message: '対応していないファイルです',
-          })
-        },
-        condition: (_: string) => true,
-      },
-    ]
-  }, [resetFileType])
-
-  useEffect(() => {
-    if (!watchFile) {
-      // clearableのため、nullになったらリセットする
-      resetFileType()
-    } else {
-      const { type } = watchFile
-
-      for (const { action, condition } of fileTypeActions) {
-        if (condition(type)) {
-          action()
-          break
-        }
-      }
-    }
-  }, [watchFile, resetFileType, fileTypeActions])
 
   const handleSubmit = async (data: FormSchemaType) => {
     try {
@@ -91,7 +45,7 @@ export const Converter = () => {
       isProcessing.current = true
 
       const { file } = data
-      if (!file || !uploadedFileType) return
+      if (!file) return
 
       open()
 
@@ -117,21 +71,10 @@ export const Converter = () => {
       <Form control={methods.control} onSubmit={(e) => handleSubmit(e.data)}>
         <Stack gap="xl">
           <MediaInput />
-          <ExtensionSelect
-            uploadedFileType={uploadedFileType}
-            watchFile={watchFile}
-          />
+          <ExtensionSelect />
           <ButtonGroup />
         </Stack>
       </Form>
     </FormProvider>
   )
-}
-
-const downloadFile = (file: File) => {
-  const link = document.createElement('a')
-  link.href = URL.createObjectURL(file)
-  link.download = file.name
-  link.click()
-  link.remove()
 }
