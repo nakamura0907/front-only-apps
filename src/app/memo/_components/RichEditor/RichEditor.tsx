@@ -1,4 +1,4 @@
-import './style.css'
+import './RichEditor.style.css'
 
 import { TextEditor } from '@/components/ui'
 
