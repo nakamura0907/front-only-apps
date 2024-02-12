@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /workspace
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+      - type: volume
+        source: node_modules
+        target: /workspace/node_modules
+    stdin_open: true
+    tty: true
+
+volumes:
+  node_modules:
