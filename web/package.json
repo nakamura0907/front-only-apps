@@ -9,6 +9,7 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@repo/app-media-converter": "*",
     "@repo/app-memo": "*",
     "@repo/ui": "*",
     "next": "^14.0.4",
