@@ -20,5 +20,8 @@
     "eslint": "^8.56.0",
     "react": "^18.2.0",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@mdxeditor/editor": "^2.9.0"
   }
 }
