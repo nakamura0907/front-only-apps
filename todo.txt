@@ -1,3 +1,7 @@
-- media-converter: 前回の選択と拡張子が異なる場合はリセットする
+- 全般: eslint, prettier, test, storybook, husky + lint-staged etc.
 - 全般: workspace export側のエイリアス設定
+- 全般: リリースワークフロー修正
+
+- media-converter: 前回の選択と拡張子が異なる場合はリセットする
+
 - react-hook-form: Attempted import error: 'useController' is not exported from 'react-hook-form' (imported as 'n').
