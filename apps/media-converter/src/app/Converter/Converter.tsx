@@ -2,7 +2,7 @@
 
 import { Form, FormProvider, Stack, notifications, useForm } from "@repo/ui"
 import { FormSchemaType } from "./Converter.types"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { convertFileFormat } from "../../features"
 import { MediaInput } from "./MediaInput/MediaInput"
 import { ExtensionSelect } from "./ExtensionSelect/ExtensionSelect"
@@ -30,37 +30,37 @@ export const Converter = () => {
 
     const methods = useForm<FormSchemaType>({
         defaultValues: {
-        file: initialValues.file,
-        targetFileExtension: initialValues.targetFileExtension,
+            file: initialValues.file,
+            targetFileExtension: initialValues.targetFileExtension,
         },
     })
 
     const isProcessing = useRef(false)
 
     const handleSubmit = async (data: FormSchemaType) => {
-    try {
-        if (isProcessing.current) return
-        isProcessing.current = true
+        try {
+            if (isProcessing.current) return
+            isProcessing.current = true
 
-        const { file } = data
-        if (!file) return
+            const { file } = data
+            if (!file) return
 
-        //   open()
+            //   open()
 
-        const convertedFile = await convertFileFormat(
-            file,
-            data.targetFileExtension,
-        )
-        downloadFile(convertedFile)
+            const convertedFile = await convertFileFormat(
+                file,
+                data.targetFileExtension,
+            )
+            downloadFile(convertedFile)
         } catch (error) {
-        console.error(error)
-        notifications.show({
-            color: 'red',
-            message: 'ファイルの変換に失敗しました',
-        })
+            console.error(error)
+            notifications.show({
+                color: 'red',
+                message: 'ファイルの変換に失敗しました',
+            })
         } finally {
-        //   close()
-        isProcessing.current = false
+            //   close()
+            isProcessing.current = false
         }
     }
 

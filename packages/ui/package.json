@@ -11,8 +11,8 @@
     "generate:component": "turbo gen react-component"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
     "@turbo/gen": "^1.11.3",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
@@ -26,7 +26,7 @@
     "@mantine/core": "^7.5.3",
     "@mantine/hooks": "^7.5.3",
     "@mantine/notifications": "^7.5.3",
-    "react-hook-form": "^7.50.1",
+    "react-hook-form": "^7.51.0",
     "react-hook-form-mantine": "^3.1.3"
   }
 }

@@ -1,2 +1,9 @@
 - media-converter: ファイル選択時・拡張子選択時に値が更新されないことがある
+    - rebuildingしなければ変更されない
+    - Formprovider + useFormのmethodsが動作していない
+        - 値は正しく受け取れているが、変更してもwatchなどが効かない
+        - controlのミス？
+    - app/test/page.tsxでは動作
+        
 - 全般: workspace export側のエイリアス設定
+- react-hook-form: Attempted import error: 'useController' is not exported from 'react-hook-form' (imported as 'n').

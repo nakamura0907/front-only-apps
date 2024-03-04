@@ -1,3 +1,6 @@
+// https://github.com/react-hook-form/react-hook-form/issues/11284
+// https://github.com/vercel/next.js/issues/60890
+
 "use client"
 
 export { Form, FormProvider, useForm, useFormContext } from 'react-hook-form'
