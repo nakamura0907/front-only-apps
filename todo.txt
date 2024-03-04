@@ -1,0 +1,2 @@
+- media-converter: ファイル選択時・拡張子選択時に値が更新されないことがある
+- 全般: workspace export側のエイリアス設定
