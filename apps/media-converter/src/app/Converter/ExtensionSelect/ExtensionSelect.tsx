@@ -14,7 +14,7 @@ const initialState: State = {
 }
 
 export const ExtensionSelect: React.FC = () => {
-  const { control, reset, watch } = useFormContext<FormSchemaType>()
+  const { control, watch, setValue } = useFormContext<FormSchemaType>()
   const watchFile = watch('file', null)
 
   const [options, setOptions] = useState(initialState.options)
@@ -36,7 +36,7 @@ export const ExtensionSelect: React.FC = () => {
       {
         action: () => {
           setOptions(initialState.options)
-          reset({ targetFileExtension: undefined })
+          setValue('targetFileExtension', null)
           notifications.show({
             color: 'red',
             message: '対応していないファイルです',
@@ -45,13 +45,13 @@ export const ExtensionSelect: React.FC = () => {
         condition: (_: string) => true,
       },
     ]
-  }, [reset])
+  }, [setValue])
 
   useEffect(() => {
     if (!watchFile) {
       // clearable
       setOptions(initialState.options)
-      reset({ targetFileExtension: undefined })
+      setValue('targetFileExtension', null)
     } else {
       const { type } = watchFile
 
@@ -62,7 +62,7 @@ export const ExtensionSelect: React.FC = () => {
         }
       }
     }
-  }, [watchFile, reset, fileTypeActions])
+  }, [watchFile, setValue, fileTypeActions])
 
   return (
     <ExtensionSelectPresenter

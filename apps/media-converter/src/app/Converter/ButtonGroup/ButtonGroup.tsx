@@ -17,7 +17,7 @@ type PresenterProps = {
   
   export const ButtonGroup = () => {
     const { watch } = useFormContext<FormSchemaType>()
-    const watchTargetFileExtension = watch('targetFileExtension', undefined)
+    const watchTargetFileExtension = watch('targetFileExtension', null)
 
     return <ButtonGroupPresenter disabled={!watchTargetFileExtension} />
   }

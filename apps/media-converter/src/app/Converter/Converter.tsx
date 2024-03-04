@@ -2,15 +2,15 @@
 
 import { Form, FormProvider, Stack, notifications, useForm } from "@repo/ui"
 import { FormSchemaType } from "./Converter.types"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { convertFileFormat } from "../../features"
 import { MediaInput } from "./MediaInput/MediaInput"
-import { ExtensionSelect } from "./ExtensionSelect/ExtensionSelect"
 import { ButtonGroup } from "./ButtonGroup/ButtonGroup"
+import { ExtensionSelect } from "./ExtensionSelect/ExtensionSelect"
 
-const initialValues: Partial<FormSchemaType> = {
+const initialValues: FormSchemaType = {
     file: null,
-    targetFileExtension: undefined
+    targetFileExtension: null
 }
 
 const downloadFile = (file: File) => {
@@ -34,6 +34,8 @@ export const Converter = () => {
             targetFileExtension: initialValues.targetFileExtension,
         },
     })
+    const watch = methods.watch()
+    console.log(watch)
 
     const isProcessing = useRef(false)
 
@@ -42,14 +44,14 @@ export const Converter = () => {
             if (isProcessing.current) return
             isProcessing.current = true
 
-            const { file } = data
-            if (!file) return
+            const { file, targetFileExtension } = data
+            if (!file || !targetFileExtension) return;
 
             //   open()
 
             const convertedFile = await convertFileFormat(
                 file,
-                data.targetFileExtension,
+                targetFileExtension,
             )
             downloadFile(convertedFile)
         } catch (error) {
