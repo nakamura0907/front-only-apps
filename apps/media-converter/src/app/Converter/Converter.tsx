@@ -34,8 +34,6 @@ export const Converter = () => {
             targetFileExtension: initialValues.targetFileExtension,
         },
     })
-    const watch = methods.watch()
-    console.log(watch)
 
     const isProcessing = useRef(false)
 
