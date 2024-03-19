@@ -42,7 +42,7 @@ export const ExtensionSelect: React.FC = () => {
             message: '対応していないファイルです',
           })
         },
-        condition: (_: string) => true,
+        condition: () => true,
       },
     ]
   }, [setValue])
