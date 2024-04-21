@@ -1,5 +1,6 @@
-- 全般: prettier, test, storybook, husky + lint-staged etc.
+- 全般: test, storybook, husky + lint-staged etc.
 - 全般: workspace export側のエイリアス設定
+- 全般：ESLint改善
 
 - media-converter: 前回の選択と拡張子が異なる場合はリセットする
 - media-converter: ローディング

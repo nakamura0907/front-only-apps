@@ -4,7 +4,7 @@ export const meta = {
     default: 'Front Only Apps',
     separator: '|',
   },
-} as const
+} as const;
 
 export const routes = {
   mediaConverter: {
@@ -16,4 +16,4 @@ export const routes = {
     label: 'Webメモ帳',
     path: '/memo',
   },
-} as const
+} as const;
