@@ -55,6 +55,7 @@ jobs:
         uses: actions/configure-pages@v4
         with:
           static_site_generator: next
+          generator_config_file: ./web/next.config.js
 
       - name: Install dependencies
         run: pnpm install
