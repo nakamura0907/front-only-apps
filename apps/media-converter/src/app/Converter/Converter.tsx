@@ -36,15 +36,14 @@ export const Converter = () => {
 
   const handleSubmit = async (data: FormSchemaType) => {
     try {
-      // 処理中の場合は何もしない
       if (isProcessing.current) return;
       isProcessing.current = true;
 
-      // 値がない場合は何もしない
+      // 値のバリデーション
+      // エラーハンドリングなどは一旦実装しない
       const { file, targetFileExtension } = data;
       if (!file || !targetFileExtension) return;
 
-      // ファイルを変換してダウンロード
       const convertedFile = await convertFileFormat(file, targetFileExtension);
       downloadLocally(convertedFile);
     } catch (error) {
@@ -54,7 +53,6 @@ export const Converter = () => {
         message: 'ファイルの変換に失敗しました',
       });
     } finally {
-      // 処理中フラグを解除
       isProcessing.current = false;
     }
   };
