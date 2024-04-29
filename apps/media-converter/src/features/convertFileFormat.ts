@@ -1,16 +1,22 @@
-import { FFmpeg, loadFFmpeg, transcodeFile } from '../vendor/ffmpeg'
+import { FFmpeg, loadFFmpeg, transcodeFile } from '../vendor/ffmpeg';
 
+/**
+ * ファイルのフォーマットを変換する
+ */
 export const convertFileFormat = async (file: File, extension: string) => {
-  const ffmpeg = new FFmpeg()
-  await loadFFmpeg(ffmpeg)
+  // FFmpegの準備
+  const ffmpeg = new FFmpeg();
+  await loadFFmpeg(ffmpeg);
 
-  const inputFileName = file.name
-  const outputFileName = replaceFileExtension(inputFileName, extension)
+  // 変換後のファイル名を生成
+  const inputFileName = file.name;
+  const outputFileName = replaceFileExtension(inputFileName, extension);
 
-  const data = await transcodeFile(ffmpeg, file, inputFileName, outputFileName)
+  // ファイルの変換
+  const data = await transcodeFile(ffmpeg, file, inputFileName, outputFileName);
 
-  return new File([data], outputFileName)
-}
+  return new File([data], outputFileName);
+};
 
 /**
  * 拡張子を置き換える
@@ -20,5 +26,5 @@ export const convertFileFormat = async (file: File, extension: string) => {
  * @returns {string} e.g. (sample.mp3, wav) => sample.wav
  */
 const replaceFileExtension = (fileName: string, extension: string) => {
-  return fileName.replace(/\.[^/.]+$/, `.${extension}`)
-}
+  return fileName.replace(/\.[^/.]+$/, `.${extension}`);
+};
