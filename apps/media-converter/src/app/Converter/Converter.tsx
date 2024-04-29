@@ -13,7 +13,7 @@ const initialValues: FormSchemaType = {
   targetFileExtension: null,
 };
 
-const downloadFile = (file: File) => {
+const downloadLocally = (file: File) => {
   const link = document.createElement('a');
 
   link.href = URL.createObjectURL(file);
@@ -46,7 +46,7 @@ export const Converter = () => {
 
       // ファイルを変換してダウンロード
       const convertedFile = await convertFileFormat(file, targetFileExtension);
-      downloadFile(convertedFile);
+      downloadLocally(convertedFile);
     } catch (error) {
       console.error(error);
       notifications.show({
